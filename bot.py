@@ -178,7 +178,7 @@ def get_near_lesson(message):
 
 
 @bot.message_handler(commands=['tomorrow'])
-def get_tomorrow(message):
+def get_tommorow(message):
     group = message.text.split()[1]
 
     now_week = datetime.date.today().isocalendar()[1]
@@ -186,23 +186,24 @@ def get_tomorrow(message):
         week = 2
     else:
         week = 1
-    web_page = get_page(group, str(week))
+    web_page = get_page(group, week)
 
     day_number = str(datetime.datetime.today().weekday() + 2)
     if int(day_number) > 5 and week == 1:
         day_number = '1'
         week = 2
-        web_page = get_page(group, str(week))
+        web_page = get_page(group, week)
     elif int(day_number) > 5 and week == 2:
         day_number = '1'
         week = 1
-        web_page = get_page(group, str(week))
-    if parse_day_schedule(web_page, day_number) is None:
+        web_page = get_page(group, week)
+    if parse_schedule_for_a_day(web_page, day_number) is None:
         bot.send_message(message.chat.id, "Завтра пар нет")
     else:
         bot.send_message(message.chat.id,
                          get_resp_for_a_day(web_page, day_number),
                          parse_mode='HTML')
+
 
 
 @bot.message_handler(commands=['all'])
