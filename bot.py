@@ -197,7 +197,7 @@ def get_tommorow(message):
         day_number = '1'
         week = 1
         web_page = get_page(group, week)
-    if parse_schedule_for_a_day(web_page, day_number) is None:
+    if parse_day_schedule(web_page, day_number) is None:
         bot.send_message(message.chat.id, "Завтра пар нет")
     else:
         bot.send_message(message.chat.id,
