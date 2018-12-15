@@ -178,7 +178,7 @@ def get_near_lesson(message):
 
 
 @bot.message_handler(commands=['tomorrow'])
-def get_tommorow(message):
+def get_tomorrow(message):
     group = message.text.split()[1]
 
     now_week = datetime.date.today().isocalendar()[1]
@@ -186,17 +186,17 @@ def get_tommorow(message):
         week = 2
     else:
         week = 1
-    web_page = get_page(group, week)
+    web_page = get_page(group, str(week))
 
     day_number = str(datetime.datetime.today().weekday() + 2)
     if int(day_number) > 5 and week == 1:
         day_number = '1'
         week = 2
-        web_page = get_page(group, week)
+        web_page = get_page(group, str(week))
     elif int(day_number) > 5 and week == 2:
         day_number = '1'
         week = 1
-        web_page = get_page(group, week)
+        web_page = get_page(group, str(week))
     if parse_day_schedule(web_page, day_number) is None:
         bot.send_message(message.chat.id, "Завтра пар нет")
     else:
@@ -205,18 +205,17 @@ def get_tommorow(message):
                          parse_mode='HTML')
 
 
-
 @bot.message_handler(commands=['all'])
 def get_all_schedule(message):
     group = message.text.split()[1]
     statement = ''
     days = {
-        '1': 'Понедельник: ',
-        '2': 'Вторник: ',
-        '3': 'Среда: ',
-        '4': 'Четверг: ',
-        '5': 'Пятница: ',
-        '6': 'Суббота: '
+        '1': 'ПН: ',
+        '2': 'ВТ: ',
+        '3': 'СР: ',
+        '4': 'ЧТ: ',
+        '5': 'ПТ: ',
+        '6': 'СБ: '
     }
     for day in range(1, 7):
         day_num = str(day)
