@@ -228,5 +228,9 @@ def get_all_schedule(message):
     bot.send_message(message.chat.id, statement, parse_mode='HTML')
 
 
-if __name__ == '__main__':
+while True:
+    try:
+      bot.polling(none_stop=True)
+    except:
+        time.sleep(5)me__ == '__main__':
     bot.polling(none_stop=True)
