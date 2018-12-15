@@ -2,6 +2,7 @@ import requests
 import config
 import telebot
 import datetime
+import time
 from bs4 import BeautifulSoup
 
 bot = telebot.TeleBot(config.token)
