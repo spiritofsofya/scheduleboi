@@ -1,7 +1,6 @@
 import requests
 import config
 import telebot
-import time
 import datetime
 from bs4 import BeautifulSoup
 
@@ -229,8 +228,5 @@ def get_all_schedule(message):
     bot.send_message(message.chat.id, statement, parse_mode='HTML')
 
 
-while True:
-    try:
-      bot.polling(none_stop=True)
-    except Exception:
-        time.sleep(5)
+if __name__ == '__main__':
+    bot.polling(none_stop=True)
